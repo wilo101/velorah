@@ -42,7 +42,7 @@ The stack is modern and minimal: **React 19**, **Vite 6**, **TypeScript**, **Tai
 **Requirements:** [Node.js](https://nodejs.org/) 20+ (recommended)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/velorah.git
+git clone https://github.com/wilo101/velorah.git
 cd velorah
 npm install
 npm run dev
