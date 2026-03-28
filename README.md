@@ -75,6 +75,7 @@ Never commit `.env`, `.env.local`, or real API keys. This repository ignores the
 | --------| ----------- |
 | `npm run dev` | Start Vite dev server (port 3000, all interfaces) |
 | `npm run build` | Production build to `dist/` |
+| `npm run build:pages` | Production build + `404.html` copy for **GitHub Pages** (SPA fallback) |
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Typecheck with `tsc --noEmit` |
 | `npm run clean` | Remove `dist` (Unix-style shell; on Windows you may delete `dist` manually) |
@@ -85,9 +86,13 @@ Never commit `.env`, `.env.local`, or real API keys. This repository ignores the
 
 ```
 velorah/
+├── .github/workflows/deploy-pages.yml
+├── public/.nojekyll
+├── scripts/copy-spa-fallback.mjs
 ├── src/
 │   ├── App.tsx       # Routes, layout, pages, global video layer
 │   ├── main.tsx
+│   ├── routerBasename.ts
 │   └── index.css     # Design tokens, glass utilities, animations
 ├── index.html
 ├── vite.config.ts
@@ -106,9 +111,15 @@ velorah/
 npm run build
 ```
 
-Static output lives in **`dist/`**. You can deploy to **Vercel**, **Netlify**, **Cloudflare Pages**, **GitHub Pages**, or any static host that supports SPA fallback (redirect all routes to `index.html`).
+Static output lives in **`dist/`**. You can deploy to **Vercel**, **Netlify**, **Cloudflare Pages**, or any static host that supports SPA fallback.
 
-For **GitHub Pages** with a subdirectory base path, set `base` in `vite.config.ts` to your repo name (e.g. `base: '/velorah/'`).
+### GitHub Pages (this repo)
+
+1. **Repository → Settings → Pages**: Source = **GitHub Actions** (workflow **Deploy to GitHub Pages**).
+2. Pushing to **`main`** runs **`npm run build:pages`** and publishes **`dist/`** only (never the raw `index.html` that points at `/src/main.tsx`).
+3. Production uses **`base: './'`** and **`resolveRouterBasename()`** so the app works at **`https://wilo101.github.io/velorah/`**.
+
+If you ever see a white page and **`main.tsx` 404** in DevTools, the host is serving **source** instead of **`dist`** — fix the deploy source, not the React code.
 
 ---
 
