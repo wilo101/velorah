@@ -5,6 +5,7 @@
 
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { resolveRouterBasename } from './routerBasename';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -188,7 +189,7 @@ function ReachUs() {
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={resolveRouterBasename()}>
       <ScrollToTop />
       <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground font-sans">
         {/* Global Video Background */}
