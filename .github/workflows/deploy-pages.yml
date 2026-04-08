@@ -29,6 +29,10 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_WEB3FORMS_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_ACCESS_KEY }}
+          VITE_CONTACT_EMAIL: ${{ secrets.VITE_CONTACT_EMAIL }}
+          VITE_HERO_VIDEO_URL: ${{ secrets.VITE_HERO_VIDEO_URL }}
         run: npm run build:pages
 
       - name: Verify production output (not dev index.html)

@@ -22,7 +22,9 @@
 
 **Velorah** is a multi-page marketing and portfolio experience for a creative studio: hero with looping ambient video, layered typography (**Instrument Serif** + **Inter**), glassmorphic navigation and cards, and smooth route-based sections—**Home**, **Studio**, **About**, **Journal**, and **Reach Us**.
 
-The stack is modern and minimal: **React 19**, **Vite 6**, **TypeScript**, **Tailwind CSS v4**, **React Router**, and **Motion**—ready to fork, customize, and deploy.
+**Fully wired UX:** mobile navigation, **studio case studies** with detail routes (`/studio/:slug`), **journal posts** with readable articles (`/journal/:slug`), **working contact flow** via [Web3Forms](https://web3forms.com) (or `mailto` fallback), **404** page, and **hero video fallback** if the remote asset fails (optional `VITE_HERO_VIDEO_URL`).
+
+The stack is modern and minimal: **React 19**, **Vite 6**, **TypeScript**, **Tailwind CSS v4**, **React Router**, and **Lucide** icons—ready to fork, customize, and deploy.
 
 ---
 
@@ -31,7 +33,9 @@ The stack is modern and minimal: **React 19**, **Vite 6**, **TypeScript**, **Tai
 | | |
 | --- | --- |
 | **Visual language** | Full-viewport video backdrop, soft overlay, liquid-glass panels |
-| **Routing** | Client-side routes with scroll restoration on navigation |
+| **Routing** | Client-side routes, deep links, SPA `404.html` on GitHub Pages, scroll restoration |
+| **Content** | Studio + journal data in `src/data/siteContent.ts` (easy to edit) |
+| **Contact** | Web3Forms API + `mailto` fallback; GitHub Actions secrets for production builds |
 | **Motion** | Staggered fade-rise entrance animations |
 | **DX** | Fast HMR, path alias `@/` (project root), env via Vite |
 
@@ -62,8 +66,12 @@ cp .env.example .env.local
 
 | Variable | Purpose |
 | -------- | ------- |
-| `GEMINI_API_KEY` | Injected at build time for optional Gemini / GenAI integrations (`vite.config` defines `process.env.GEMINI_API_KEY`). The current UI does not call the API out of the box—you can wire it when you extend the app. |
-| `APP_URL` | Reserved for hosted URLs, callbacks, or metadata. |
+| `VITE_WEB3FORMS_ACCESS_KEY` | Free key from [web3forms.com](https://web3forms.com)—submissions go to your email. For GitHub Pages, add as **Actions secret** `VITE_WEB3FORMS_ACCESS_KEY`. |
+| `VITE_CONTACT_EMAIL` | Used for the `mailto` fallback when the Web3Forms key is empty. Optional Actions secret for production. |
+| `VITE_HERO_VIDEO_URL` | Optional: set to `/hero.mp4` (file in `public/`) or any MP4 URL. |
+| `VITE_ROUTER_BASENAME` | Optional override for SPA basename (usually auto on `*.github.io`). |
+| `GEMINI_API_KEY` | Injected for optional future GenAI use (`vite.config`). Not used by the current UI. |
+| `APP_URL` | Reserved for hosted URLs / metadata. |
 
 Never commit `.env`, `.env.local`, or real API keys. This repository ignores them via `.gitignore`.
 
@@ -90,10 +98,13 @@ velorah/
 ├── public/.nojekyll
 ├── scripts/copy-spa-fallback.mjs
 ├── src/
-│   ├── App.tsx       # Routes, layout, pages, global video layer
+│   ├── App.tsx
 │   ├── main.tsx
 │   ├── routerBasename.ts
-│   └── index.css     # Design tokens, glass utilities, animations
+│   ├── vite-env.d.ts
+│   ├── data/siteContent.ts
+│   ├── components/
+│   └── index.css
 ├── index.html
 ├── vite.config.ts
 ├── tsconfig.json
@@ -127,7 +138,6 @@ If you ever see a white page and **`main.tsx` 404** in DevTools, the host is ser
 
 - **UI:** React 19, Tailwind CSS 4, Lucide icons  
 - **Routing:** React Router 7  
-- **Motion:** [Motion](https://motion.dev/)  
 - **Tooling:** Vite 6, TypeScript 5.8  
 - **Optional:** `@google/genai`, Express types (for future backend or tooling)
 
