@@ -31,14 +31,14 @@ export function BackgroundVideo() {
           loop
           muted
           playsInline
-          className="fixed inset-0 w-full h-full object-cover z-0 opacity-60"
+          className="velorah-bg-media fixed inset-0 w-full h-full object-cover z-0 opacity-60 transition-opacity duration-500"
           onError={onError}
         >
           <source src={src} type="video/mp4" />
         </video>
       ) : (
         <div
-          className="fixed inset-0 z-0 opacity-90"
+          className="velorah-bg-media fixed inset-0 z-0 opacity-90 transition-opacity duration-500"
           style={{
             background:
               'radial-gradient(ellipse 120% 80% at 50% 20%, hsl(201 90% 22%) 0%, hsl(201 100% 8%) 45%, hsl(220 40% 6%) 100%)',

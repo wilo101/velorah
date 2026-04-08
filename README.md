@@ -24,6 +24,8 @@
 
 **Fully wired UX:** mobile navigation, **studio case studies** with detail routes (`/studio/:slug`), **journal posts** with readable articles (`/journal/:slug`), **working contact flow** via [Web3Forms](https://web3forms.com) (or `mailto` fallback), **404** page, and **hero video fallback** if the remote asset fails (optional `VITE_HERO_VIDEO_URL`).
 
+**Features:** **⌘K / Ctrl+K** command palette (search projects + journal), **studio category filters**, **journal search** + **Saved** list (local storage), **share / copy link** on case study & article pages, **reading progress** on articles, **focus mode** (dim background), **reduced-motion** friendly CSS.
+
 The stack is modern and minimal: **React 19**, **Vite 6**, **TypeScript**, **Tailwind CSS v4**, **React Router**, and **Lucide** icons—ready to fork, customize, and deploy.
 
 ---
