@@ -14,15 +14,10 @@
 }
 
 @layer base {
-  :root {
-    --font-display: 'Instrument Serif', serif;
-    --font-body: 'Inter', sans-serif;
-  }
-
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-body);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   }
 }
 
@@ -38,34 +33,44 @@
     overflow: hidden;
     transition: transform 0.3s ease;
   }
-  
+
   .liquid-glass::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 1.4px;
-    background: linear-gradient(180deg,
-      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
-      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.15) 80%,
+      rgba(255, 255, 255, 0.45) 100%
+    );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
   }
 
-  .animate-fade-rise { animation: fade-rise 0.8s ease-out both; }
-  .animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
-  .animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
+  .animate-fade-rise {
+    animation: fade-rise 0.8s ease-out both;
+  }
+  .animate-fade-rise-delay {
+    animation: fade-rise 0.8s ease-out 0.2s both;
+  }
+  .animate-fade-rise-delay-2 {
+    animation: fade-rise 0.8s ease-out 0.4s both;
+  }
 }
 
-/* Focus mode: dim background for reading / less motion distraction */
-html[data-velorah-focus="true"] .velorah-bg-media {
+html[data-velorah-focus='true'] .velorah-bg-media {
   opacity: 0.12 !important;
 }
 
-html[data-velorah-focus="true"] .velorah-scrim {
+html[data-velorah-focus='true'] .velorah-scrim {
   background-color: hsl(201 100% 11% / 0.94) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
@@ -86,6 +91,12 @@ html[data-velorah-focus="true"] .velorah-scrim {
 }
 
 @keyframes fade-rise {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

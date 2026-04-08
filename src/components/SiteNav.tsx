@@ -3,10 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+'use client';
+
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Eye, EyeOff, Menu, Search, X } from 'lucide-react';
-import { getFocusMode, loadFocusModeFromStorage, setFocusMode } from '../lib/focusMode';
+import { getFocusMode, loadFocusModeFromStorage, setFocusMode } from '@/lib/focusMode';
 
 const links = [
   { path: '/', label: 'Home' },
@@ -26,10 +29,9 @@ export type SiteNavProps = {
 };
 
 export function SiteNav({ onOpenSearch }: SiteNavProps) {
-  const location = useLocation();
+  const pathname = usePathname() ?? '/';
   const [open, setOpen] = useState(false);
   const [focusOn, setFocusOn] = useState(false);
-  const pathname = location.pathname;
 
   useLayoutEffect(() => {
     loadFocusModeFromStorage();
@@ -59,9 +61,10 @@ export function SiteNav({ onOpenSearch }: SiteNavProps) {
     <>
       <nav className="relative print:hidden z-40 flex flex-row items-center justify-between px-4 sm:px-8 py-6 max-w-7xl mx-auto w-full gap-2">
         <Link
-          to="/"
+          href="/"
           className="text-2xl sm:text-3xl tracking-tight text-foreground shrink-0"
-          style={{ fontFamily: 'var(--font-display)' }}
+          style={{ fontFamily: 'var(--font-display), serif' }}
+          prefetch
         >
           Velorah<sup className="text-xs">®</sup>
         </Link>
@@ -70,7 +73,8 @@ export function SiteNav({ onOpenSearch }: SiteNavProps) {
           {links.map((link) => (
             <Link
               key={link.path}
-              to={link.path}
+              href={link.path}
+              prefetch
               className={`text-sm transition-colors ${
                 pathMatches(link.path, pathname) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
               }`}
@@ -105,7 +109,8 @@ export function SiteNav({ onOpenSearch }: SiteNavProps) {
           </button>
 
           <Link
-            to="/reach"
+            href="/reach"
+            prefetch
             className="liquid-glass rounded-full px-5 py-2.5 text-sm text-foreground hover:scale-[1.03] cursor-pointer hidden lg:inline-block"
           >
             Begin Journey
@@ -150,17 +155,18 @@ export function SiteNav({ onOpenSearch }: SiteNavProps) {
             {links.map((link) => (
               <Link
                 key={link.path}
-                to={link.path}
+                href={link.path}
+                prefetch
                 className={`liquid-glass rounded-2xl px-5 py-4 text-lg ${
                   pathMatches(link.path, pathname) ? 'text-foreground' : 'text-muted-foreground'
                 }`}
-                style={{ fontFamily: 'var(--font-display)' }}
+                style={{ fontFamily: 'var(--font-display), serif' }}
               >
                 {link.label}
               </Link>
             ))}
           </div>
-          <Link to="/reach" className="liquid-glass rounded-full px-8 py-4 text-center text-foreground mt-auto">
+          <Link href="/reach" prefetch className="liquid-glass rounded-full px-8 py-4 text-center text-foreground mt-auto">
             Begin Journey
           </Link>
         </div>

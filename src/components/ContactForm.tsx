@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+'use client';
+
 import { FormEvent, useState, useCallback } from 'react';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -17,7 +19,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorDetail, setErrorDetail] = useState<string | null>(null);
 
-  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY?.trim();
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
 
   const onFieldChange = useCallback(() => {
     if (status === 'success') {
@@ -46,7 +48,7 @@ export function ContactForm() {
   }
 
   function openMailto() {
-    const to = import.meta.env.VITE_CONTACT_EMAIL?.trim() || 'contact@example.com';
+    const to = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || 'contact@example.com';
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
     window.location.href = `mailto:${to}?subject=${encodeURIComponent('Velorah contact')}&body=${body}`;
   }
@@ -96,7 +98,7 @@ export function ContactForm() {
       {!accessKey ? (
         <p className="text-sm text-muted-foreground text-center mb-6 rounded-2xl liquid-glass px-4 py-3">
           For instant delivery to your inbox, add{' '}
-          <code className="text-foreground/90 text-xs">VITE_WEB3FORMS_ACCESS_KEY</code> in{' '}
+          <code className="text-foreground/90 text-xs">NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY</code> in{' '}
           <code className="text-foreground/90 text-xs">.env.local</code> (free at{' '}
           <a href="https://web3forms.com" className="underline hover:text-foreground" target="_blank" rel="noreferrer">
             web3forms.com

@@ -3,14 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+'use client';
+
 import { useCallback, useState } from 'react';
 
 const DEFAULT_SRC =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4';
 
-/** Optional local override: place `hero.mp4` in `public/` and set VITE_HERO_VIDEO_URL=/hero.mp4 */
 function videoSrc(): string {
-  const fromEnv = import.meta.env.VITE_HERO_VIDEO_URL?.trim();
+  const fromEnv = process.env.NEXT_PUBLIC_HERO_VIDEO_URL?.trim();
   if (fromEnv) return fromEnv;
   return DEFAULT_SRC;
 }

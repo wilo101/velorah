@@ -1,50 +1,47 @@
 {
   "name": "velorah",
-  "description": "Velorah — cinematic studio site: React, Vite, Tailwind v4, glass UI, video hero.",
+  "description": "Velorah — Next.js studio site: React, Framer Motion, Radix, Tailwind, Lottie.",
   "private": false,
-  "version": "1.0.0",
-  "type": "module",
+  "version": "2.0.0",
   "keywords": [
+    "nextjs",
     "react",
-    "vite",
     "typescript",
     "tailwindcss",
-    "portfolio",
-    "glassmorphism",
-    "studio"
+    "framer-motion",
+    "radix-ui",
+    "portfolio"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/wilo101/velorah.git"
   },
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "build:pages": "vite build && node scripts/copy-spa-fallback.mjs",
-    "preview": "vite preview",
-    "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@google/genai": "^1.29.0",
-    "@tailwindcss/vite": "^4.1.14",
-    "@vitejs/plugin-react": "^5.0.4",
-    "dotenv": "^17.2.3",
-    "express": "^4.21.2",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-slot": "^1.2.4",
+    "framer-motion": "^11.15.0",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
+    "next": "15.5.14",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.13.2",
-    "vite": "^6.2.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.14.0",
-    "autoprefixer": "^10.4.21",
+    "@eslint/eslintrc": "^3.2.0",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.14",
+    "postcss": "^8.4.49",
     "tailwindcss": "^4.1.14",
-    "tsx": "^4.21.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "typescript": "~5.8.2"
   }
 }

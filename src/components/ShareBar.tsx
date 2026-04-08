@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Check, Link2, Share2 } from 'lucide-react';
 
